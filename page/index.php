@@ -4,11 +4,37 @@ class page_index extends Page {
         parent::init();
         $page=$this;
 
-        // Adding view box with another view object inside with my custom HTML template
-        $this->add('View_Info')->add('View',null,null,array('view/myinfobox'));
+	$form = $this->add('Form',null,'LoginForm');
+        $form->setFormClass('vertical');
+        $form->addField('line','login');
+        $form->addfield('password','password');
+        $form->addSubmit('Login');
 
-        // Paste any Agile Toolkit examples BELOW THIS LINE. You can remove what I have here:
+	if($form->isSubmitted()){
 
+	  // Short-cuts
+	  $auth=$this->api->auth;
+	  $l=$form->get('login');
+	  $p=$form->get('password');
 
+	  // Manually encrypt password
+	  $enc_p = $auth->encryptPassword($p,$l);
+
+	  // Manually verify login
+	  if($auth->verifyCredentials($l,$enc_p)){
+
+	    // Manually log-in
+	    $auth->login($l);
+	    $form->js()->univ()->redirect('video')->execute();
+	  }
+	  $form->getElement('password')->displayFieldError('Incorrect login');
+	}
     }
+    function defaultTemplate()
+    {
+      return array('page/index');
+    }
+    
 }
+
+
