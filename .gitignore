@@ -1,2 +1,4 @@
 config.php
 .htaccess
+doc/dbupdates/*.ok
+*.bak
