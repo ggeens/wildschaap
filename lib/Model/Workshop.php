@@ -1,3 +1,4 @@
+<?php
 class Model_Workshop extends Model_Table
 {
   public $table = 'ws_workshop';

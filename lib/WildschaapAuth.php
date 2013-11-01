@@ -1,9 +1,10 @@
+<?php
 class WildschaapAuth extends BasicAuth {
     /** Initialize our auth. Set model and password encryption */
     function init(){
         parent::init();
         $this->setModel('Model_Account');
-        $this->getModel()->addField('password')->system(true);
+        $this->getModel()->getField('paswoord')->system(true);
 
         $this->usePasswordEncryption('sha256/salt');
     }

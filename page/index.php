@@ -25,7 +25,7 @@ class page_index extends Page {
 
 	    // Manually log-in
 	    $auth->login($l);
-	    $form->js()->univ()->redirect('video')->execute();
+	    $form->js()->univ()->redirect('about')->execute();
 	  }
 	  $form->getElement('password')->displayFieldError('Incorrect login');
 	}
