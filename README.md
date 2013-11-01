@@ -15,8 +15,20 @@ Requirements
 
 The application needs a Mysql database and PHP 5.
 
+Installation
+------------
+
+Installation guide can be found on the Github Wiki:
+https://github.com/ggeens/wildschaap/wiki
+
 License
 -------
 
 This application is released under the same license as the ATK
 toolkit. (AGPL)
+
+Further reading
+---------------
+
+Source code and other documentation is available on Github.
+https://github.com/ggeens/wildschaap
