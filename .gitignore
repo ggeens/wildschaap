@@ -3,3 +3,6 @@ config.php
 doc/dbupdates/*.ok
 *.bak
 *~
+.buildpath
+.project
+.settings/
