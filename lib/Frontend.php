@@ -47,6 +47,7 @@ class Frontend extends ApiFrontend {
 	  ->addMenuItem('index','Welkom')
 	  ->addMenuItem('about','Over')
 	  ->addMenuItem('how','Documentation')
+	  ->addMenuItem('account', 'Gebruikers')
 	  ->addMenuItem('logout', 'Uitloggen')
             ;
 
@@ -61,16 +62,6 @@ class Frontend extends ApiFrontend {
                 ->set('Logout')
                 ->setAttr('href',$this->getDestinationURL('logout'))
                 ;
-        }else{
-            $this->add('HtmlElement',null,'UserMenu')
-                ->setElement('a')
-                ->set('Login')
-                ->setAttr('href',$this->getDestinationURL('authtest'))
-                ;
         }
-    }
-    function page_examples($p){
-        header('Location: '.$this->pm->base_path.'examples');
-        exit;
     }
 }

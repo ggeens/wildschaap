@@ -1,18 +1,16 @@
 <?php
-class page_bootstrap extends Page {
+class page_addaccount extends Page {
 	function init() {
 		parent::init ();
+		$this->api->auth->check();
 		$model = $this->add ( 'Model_Account' );
-		
-		if ($model->count ()->getOne () > 0) {
-			throw $this->exception ( 'Init reeds gebeurd' );
-		}
 		
 		$form = $this->add ( 'MVCForm' );
 		$form->setModel ( $model );
 		$form->addField ( 'password', 'paswoord' )->isMandatory ( true );
 		$form->addField ( 'password', 'bevestigPaswoord' )->isMandatory ( true );
 		$form->addSubmit ();
+		$form->addButton('Annuleren')->redirect('account');
 		
 		$form->onSubmit ( function ($form) {
 			if ($form->get ('paswoord') == '')
@@ -21,7 +19,7 @@ class page_bootstrap extends Page {
 				throw $form->exception ( 'Paswoorden verschillen' )->setField ( 'bevestigPaswoord' );
 			$form->model->set ( 'paswoord', $form->api->auth->encryptPassword ( $form->get ( 'paswoord' ), $form->get ( 'email' ) ) );
 			$form->update ();
-			$form->js ()->hide ( 'slow' )->univ ()->successMessage ( 'Gebruiker bewaard' )->execute ();
+			$form->js ()->hide ( 'slow' )->univ ()->redirect('account')->execute();
 		} );
 	}
 }

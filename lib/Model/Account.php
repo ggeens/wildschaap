@@ -9,7 +9,7 @@ class Model_Account extends Model_Table
     
     $this->addField('naam')->required(true);
     $this->addField('email')->required(true);
-    $this->addField('paswoord')->type('password')->required(true);
+    $this->addField('paswoord')->type('password')->required(true)->system(true);
   }
   
 }

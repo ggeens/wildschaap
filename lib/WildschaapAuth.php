@@ -12,13 +12,13 @@ class WildschaapAuth extends BasicAuth {
     /** Do not show form, simply redirect to index page, if not authorized */
     function check(){
         if(!$this->isLoggedIn()){
-            $this->api->redirect('/');
+            $this->api->redirect('login');
         }
     }
 
     /** Password validation routine, now using the model. */
     function verifyCredentials($email,$password){
-        $model = $this->getModel()->loadBy('email',$email);
+        $model = $this->getModel()->tryLoadBy('email',$email);
         if(!$model->isInstanceLoaded())return false;
         if($password == $model->get('paswoord')){
             $this->addInfo($model->get());
