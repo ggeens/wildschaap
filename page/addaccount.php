@@ -17,8 +17,9 @@ class page_addaccount extends Page {
 				throw $form->exception ( 'Paswoord mag niet leeg zijn' )->setField ( 'paswoord' );
 			if ($form->get ( 'paswoord' ) != $form->get ( 'bevestigPaswoord' ))
 				throw $form->exception ( 'Paswoorden verschillen' )->setField ( 'bevestigPaswoord' );
-			$model->set ( 'paswoord', $form->api->auth->encryptPassword ( $form->get ( 'paswoord' ), $form->get ( 'email' ) ) );
-			$model->save();
+			$form->model->set ( 'paswoord', $form->api->auth->encryptPassword ( $form->get ( 'paswoord' ), $form->get ( 'email' ) ) );
+			$form->update();
+			$form->model->save();
 			$form->js ()->hide ( 'slow' )->univ ()->redirect('account')->execute();
 		} );
 	}
