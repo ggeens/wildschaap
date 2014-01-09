@@ -45,9 +45,10 @@ class Frontend extends ApiFrontend {
         // it and place in a separate class
         $this->add('Menu',null,'Menu')
 	  ->addMenuItem('index','Welkom')
-	  ->addMenuItem('about','Over')
+	  ->addMenuItem('workshops','Workshops')
 	  ->addMenuItem('how','Documentation')
 	  ->addMenuItem('account', 'Gebruikers')
+	  ->addMenuItem('about','Over')
 	  ->addMenuItem('logout', 'Uitloggen')
             ;
 

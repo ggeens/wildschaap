@@ -1,5 +1,5 @@
 <?php
-class Model_Account extends Model_Table 
+class Model_Account extends SQL_Model 
 {
   public $table = 'ws_account';
   
