@@ -7,8 +7,8 @@ class Model_Account extends SQL_Model
   {
     parent::init();
     
-    $this->addField('naam')->required(true);
-    $this->addField('email')->required(true);
+    $this->addField('naam')->required(true)->sortable(true);
+    $this->addField('email')->required(true)->sortable(true);
     $this->addField('paswoord')->type('password')->required(true)->system(true);
   }
   

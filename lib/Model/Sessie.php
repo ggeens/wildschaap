@@ -6,8 +6,8 @@ class Model_Sessie extends SQL_Model {
 	{
 		parent::init();
 		
-		$this->addField('datum')->type('date')->required(true);
-		$this->addField('plaats')->required(true);
+		$this->addField('datum')->type('date')->required(true)->sortable(true);
+		$this->addField('plaats')->required(true)->sortable(true);
 		$this->addField('prijs')->type('money');
 		
 		$this->hasOne('Workshop')->caption('Workshop');

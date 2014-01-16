@@ -15,6 +15,7 @@ class Frontend extends ApiFrontend {
                     'php'=>array(
                         'mvc',
                         'misc/lib',
+                    	'translation/lib',
                         )
                     ))
             ->setParent($this->pathfinder->base_location);
@@ -52,17 +53,8 @@ class Frontend extends ApiFrontend {
 	  ->addMenuItem('logout', 'Uitloggen')
             ;
 
-        $this->addLayout('UserMenu');
-    }
-    function layout_UserMenu(){
-        if($this->auth->isLoggedIn()){
-            $this->add('Text',null,'UserMenu')
-                ->set('Hallo, '.$this->auth->get('username').' | ');
-            $this->add('HtmlElement',null,'UserMenu')
-                ->setElement('a')
-                ->set('Logout')
-                ->setAttr('href',$this->getDestinationURL('logout'))
-                ;
-        }
+        $this->add('translation/Controller_Basic')
+        ->setLocale('nl_BE')
+        ->setModel('Translation');
     }
 }
