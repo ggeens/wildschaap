@@ -22,5 +22,6 @@ class page_addaccount extends Page {
 			$form->model->save();
 			$form->js ()->hide ( 'slow' )->univ ()->redirect('account')->execute();
 		} );
+		$this->api->template->set('page_title', 'Nieuwe Gebruiker');
 	}
 }

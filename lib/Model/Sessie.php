@@ -10,6 +10,6 @@ class Model_Sessie extends SQL_Model {
 		$this->addField('plaats')->required(true);
 		$this->addField('prijs')->type('money');
 		
-		$this->hasOne('Workshop');
+		$this->hasOne('Workshop')->caption('Workshop');
 	}
 }

@@ -20,6 +20,7 @@ class page_account extends Page {
  			$form->addSubmit ( 'Wijzig' );
  			$form->onSubmit ( array($this, 'submitted') );
 		}
+		$this->api->template->set('page_title', 'Gebruikers');
 	}
 	
 	function submitted($form) {
