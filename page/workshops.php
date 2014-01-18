@@ -6,7 +6,7 @@ class page_workshops extends Page {
 		$grid = $this->add('CRUD');
 		$grid->setModel('Workshop');
 		
-		$grid->addRef('Sessie');
+		$grid->addRef('Sessie', ['label' => 'Sessies']);
 		$this->api->template->set('page_title', 'Workshops');
 	}
 }

@@ -5,6 +5,6 @@ class Model_Translation extends \SQL_Model {
 		parent::init();
 
 		$this->addField('key')->system(true)->visible(true)->editable(true)->readonly(true)->sortable(true);
-		$this->addField('nl_be')->sortable(true);
+		$this->addField('tr_nl')->sortable(true);
 	}
 }

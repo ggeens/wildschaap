@@ -47,6 +47,7 @@ class Frontend extends ApiFrontend {
         $this->add('Menu',null,'Menu')
 	  ->addMenuItem('index','Welkom')
 	  ->addMenuItem('workshops','Workshops')
+	  ->addMenuItem('cursisten','Cursisten')
 	  ->addMenuItem('how','Documentation')
 	  ->addMenuItem('account', 'Gebruikers')
 	  ->addMenuItem('about','Over')
@@ -54,7 +55,7 @@ class Frontend extends ApiFrontend {
             ;
 
         $this->add('translation/Controller_Basic')
-        ->setLocale('nl_BE')
+        ->setLocale('nl')
         ->setModel('Translation');
     }
 }
