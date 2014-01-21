@@ -11,7 +11,8 @@ class page_cursisten extends Page {
 		
 		if ($_GET['Aanpassen']) {
 			$this->api->stickyGET('id');
-			$this->api->redirect('cursist');
+			$url = $this->api->url('cursist', array('id'=>$_GET['Aanpassen']));
+			$this->api->redirect($url);
 		}
 
 		$this->api->template->set('page_title', 'Cursisten');

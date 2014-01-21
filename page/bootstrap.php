@@ -21,6 +21,7 @@ class page_bootstrap extends Page {
 				throw $form->exception ( 'Paswoorden verschillen' )->setField ( 'bevestigPaswoord' );
 			$form->model->set ( 'paswoord', $form->api->auth->encryptPassword ( $form->get ( 'paswoord' ), $form->get ( 'email' ) ) );
 			$form->update ();
+			$form->model->save();
 			$form->js ()->hide ( 'slow' )->univ ()->successMessage ( 'Gebruiker bewaard' )->execute ();
 		} );
 	}
