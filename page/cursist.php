@@ -19,6 +19,8 @@ class page_cursist extends Page {
 			$form->js ()->hide ( 'slow' )->univ ()->redirect('cursisten')->execute();
 		} );
 		
+		$this->add('CRUD')->setModel('Inschrijving')->addCondition('ws_cursist_id', '=', $_GET['id']);
+		
 		$this->api->template->set('page_title', 'Cursist');
 	}
 }
