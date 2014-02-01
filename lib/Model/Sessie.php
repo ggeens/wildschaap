@@ -9,7 +9,12 @@ class Model_Sessie extends SQL_Model {
 		$this->addField('datum')->type('date')->required(true)->sortable(true);
 		$this->addField('plaats')->required(true)->sortable(true)->sortable(true);
 		$this->addField('prijs')->type('money');
-		
+
 		$this->hasOne('Workshop')->caption('Workshop');
+		
+		if ($this->loaded()) {
+			$this->addExpression('title')->set();
+		}
 	}
+	
 }

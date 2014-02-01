@@ -2,6 +2,7 @@
 class Model_Cursist extends SQL_Model 
 {
   public $table = 'ws_cursist';
+  public $title_field = 'naam';
   
   function init()
   {
