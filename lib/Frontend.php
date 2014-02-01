@@ -48,7 +48,6 @@ class Frontend extends ApiFrontend {
 	  ->addMenuItem('index','Welkom')
 	  ->addMenuItem('workshops','Workshops')
 	  ->addMenuItem('cursisten','Cursisten')
-	  ->addMenuItem('how','Documentation')
 	  ->addMenuItem('account', 'Gebruikers')
 	  ->addMenuItem('about','Over')
 	  ->addMenuItem('logout', 'Uitloggen')
