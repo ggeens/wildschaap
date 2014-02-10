@@ -6,7 +6,8 @@ class page_workshops extends Page {
 		$grid = $this->add('CRUD');
 		$grid->setModel('Workshop');
 		
-		$grid->addRef('Sessie', ['label' => 'Sessies']);
+		$grid->addRef('Sessie', ['label' => 'Sessies', 'grid_fields'=> ['datum', 'plaats', 'prijs']]);
+		$grid->grid->addPaginator();
 		$this->api->template->set('page_title', 'Workshops');
 	}
 }

@@ -6,9 +6,9 @@ class Model_Inschrijving extends SQL_Model {
 	{
 		parent::init();
 
-		$this->addField('betaald')->type('boolean')->required(true);
+		$this->hasOne('Sessie')->caption('Sessie')->required(true);
+		$this->hasOne('Cursist')->caption('Cursist')->required(true);
 
-		$this->hasOne('Sessie')->caption('Sessie');
-		$this->hasOne('Cursist')->caption('Cursist');
+		$this->addField('betaald')->type('boolean')->required(true);
 	}
 }

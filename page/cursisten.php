@@ -38,7 +38,7 @@ class page_cursisten extends Page {
 		$this->api->stickyGET('ws_cursist_id');
 		
 		$g = $this->add('View')->addStyle('#eee')->add('Grid');
-		$g->setModel($model);
+		$g->setModel($model, ['ws_workshop', 'datum', 'plaats']);
 	}
 	
 	function page_inschrijven() {
@@ -47,7 +47,6 @@ class page_cursisten extends Page {
 		$form = $this->add('Form')->addClass('stacked');
 		$form->setModel($model);
 		$form->set('ws_cursist_id', $_GET['id']);
-		$form->getField('Cursist')->setReadOnly(true);
 		$form->addSubmit();
 		if ($form->isSubmitted()) {
 			$form->update();

@@ -1,6 +1,7 @@
 <?php
 class Model_Sessie extends SQL_Model {
 	public $table = 'ws_sessie';
+	public $title_field = 'title';
 	
 	function init()
 	{
@@ -9,12 +10,16 @@ class Model_Sessie extends SQL_Model {
 		$this->addField('datum')->type('date')->required(true)->sortable(true);
 		$this->addField('plaats')->required(true)->sortable(true)->sortable(true);
 		$this->addField('prijs')->type('money');
-
+		
 		$this->hasOne('Workshop')->caption('Workshop');
 		
-		if ($this->loaded()) {
-			$this->addExpression('title')->set();
-		}
+		$this->addExpression('title')->set('null');
+		
+		$this->addHook('afterLoad', function($o) {
+			$n = $o->get('ws_workshop');
+			$d = $o->get('datum');
+			$o->set('title', $n . ' ('. $d. ')');
+		});
 	}
 	
 }
