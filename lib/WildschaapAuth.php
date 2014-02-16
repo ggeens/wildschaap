@@ -27,4 +27,8 @@ class WildschaapAuth extends BasicAuth {
         }else return false;
 
     }
+    
+    function isAdmin() {
+    	return $this->get('admin')=='Y';
+    }
 }

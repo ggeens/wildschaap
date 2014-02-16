@@ -10,6 +10,7 @@ class Model_Account extends SQL_Model
     $this->addField('naam')->required(true)->sortable(true);
     $this->addField('email')->required(true)->sortable(true);
     $this->addField('paswoord')->type('password')->required(true)->system(true);
+    $this->addField('admin')->type('boolean')->required(true);
   }
   
 }

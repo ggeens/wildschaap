@@ -4,11 +4,20 @@ class page_account extends Page {
 	
 	function init() {
 		parent::init();
-		$this->api->auth->check();
+		$auth = $this->api->auth;
+		$auth->check();
+		$admin = $auth->isAdmin();
 		$CRUD = $this->add('CRUD', array('allow_add'=>false));
-		$model = $CRUD->setModel('Account');
-		if ($CRUD->grid)
+		if ($admin) {
+			$model = $this->add('Model_Account');
+			$model->getField('admin');
+			$CRUD->setModel($model);
+		} else {
+			$model = $CRUD->setModel('Account_Noadmin');
+		}
+		if ($CRUD->grid) {
 			$CRUD->grid->addButton('Nieuwe Gebruiker')->redirect('addaccount');
+		}
 		$f = $CRUD->addFrame('zet paswoord');
 		if ($f != null) {
 			$this->id = $CRUD->id;
