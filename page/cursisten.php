@@ -18,7 +18,7 @@ class page_cursisten extends Page {
 			if ($_GET['inschrijven']) {
 				$name = $crud->grid->model->load($_GET['inschrijven'])->get('naam');
  				$this->js()->univ()->frameURL('Nieuwe inschrijving voor '.$name,
- 					$this->api->url('./inschrijven', array('id'=>$_GET['inschrijven'])))
+ 					$this->api->url('./nieuw', array('id'=>$_GET['inschrijven'])))
  					->execute();
 			}
 		}
@@ -39,9 +39,18 @@ class page_cursisten extends Page {
 		
 		$g = $this->add('View')->addStyle('#eee')->add('Grid');
 		$g->setModel($model, ['ws_workshop', 'datum', 'plaats']);
+		$g->addColumn('Button', 'wissen');
+		
+		if ($_GET['wissen']) {
+			$model = $this->add('Model_Inschrijving');
+			$cursist = $_GET['ws_cursist_id'];
+			$sessie = $_GET['wissen'];
+			$model->findInschrijving($cursist, $sessie)->delete();
+			$this->js()->univ()->location($this->api->url('cursisten'))->execute();
+		}
 	}
 	
-	function page_inschrijven() {
+	function page_nieuw() {
 		$this->api->auth->check();
 		$model = $this->add('Model_Inschrijving');
 		$form = $this->add('Form')->addClass('stacked');
@@ -49,6 +58,11 @@ class page_cursisten extends Page {
 		$form->set('ws_cursist_id', $_GET['id']);
 		$form->addSubmit();
 		if ($form->isSubmitted()) {
+			$cursist = $form->get('ws_cursist_id');
+			$sessie = $form->get('ws_sessie_id');
+			if ($this->add('Model_Inschrijving')->findInschrijving($cursist, $sessie)->loaded()) {
+				throw $form->exception('Deze cursist is reeds ingeschreven voor deze sessie')->setField('ws_sessie_id');
+			}
 			$form->update();
 			$form->js()->univ()->location($this->api->url('..'))->execute();
 		}

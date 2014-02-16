@@ -11,4 +11,11 @@ class Model_Inschrijving extends SQL_Model {
 
 		$this->addField('betaald')->type('boolean')->required(true);
 	}
+	
+	function findInschrijving($cursist, $sessie) {
+		$this->addCondition('ws_sessie_id', $sessie);
+		$this->addCondition('ws_cursist_id', $cursist);
+		$this->tryLoadAny();
+		return $this;
+	}
 }

@@ -12,6 +12,7 @@ class Model_Sessie extends SQL_Model {
 		$this->addField('prijs')->type('money');
 		
 		$this->hasOne('Workshop')->caption('Workshop');
+		$this->hasMany('Inschrijving');
 		
 		$this->addExpression('title')->set('null');
 		
