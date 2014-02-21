@@ -29,6 +29,7 @@ class page_login extends Page {
 			}
 			$form->getElement ( 'password' )->displayFieldError ( 'Incorrect login' );
 		}
+		$this->api->template->set('page_title', 'Aanmelden');
 	}
 	function defaultTemplate() {
 		return array (
