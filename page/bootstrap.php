@@ -20,6 +20,7 @@ class page_bootstrap extends Page {
 			if ($form->get ( 'paswoord' ) != $form->get ( 'bevestigPaswoord' ))
 				throw $form->exception ( 'Paswoorden verschillen' )->setField ( 'bevestigPaswoord' );
 			$form->model->set ( 'paswoord', $form->api->auth->encryptPassword ( $form->get ( 'paswoord' ), $form->get ( 'email' ) ) );
+			$form->model->set('admin', true);
 			$form->update ();
 			$form->model->save();
 			$form->js ()->hide ( 'slow' )->univ ()->successMessage ( 'Gebruiker bewaard' )->execute ();
