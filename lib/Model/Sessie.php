@@ -10,7 +10,7 @@ class Model_Sessie extends SQL_Model {
 		$this->addField('datum')->type('date')->required(true)->sortable(true)->caption('Begindatum');
 		$this->addField('plaats')->required(true)->sortable(true)->sortable(true);
 		$this->addField('prijs')->type('money');
-		$this->addField('capaciteit')->required(true)->type('integer')->caption('Max. deelnemers');
+		$this->addField('capaciteit')->required(true)->type('int')->caption('Max. deelnemers');
 		
 		$this->hasOne('Workshop')->caption('Workshop');
 		$this->hasMany('Inschrijving');

@@ -37,8 +37,9 @@ class page_cursisten extends Page {
 		$model->addCondition('ws_cursist_id', $_GET['ws_cursist_id']);
 		$this->api->stickyGET('ws_cursist_id');
 		
-		$g = $this->add('View')->addStyle('#eee')->add('Grid');
-		$g->setModel($model, ['ws_workshop', 'datum', 'plaats']);
+		$g = $this->add('View')->addStyle('background-color: #eee')->add('Grid');
+		$g->setModel($model, ['ws_workshop', 'datum', 'plaats', 'betaald']);
+		$g->addFormatter('betaald', 'checkbox');
 		$g->addColumn('Button', 'wissen');
 		
 		if ($_GET['wissen']) {
