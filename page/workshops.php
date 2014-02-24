@@ -25,7 +25,6 @@ class page_workshops extends Page {
 			}
 		}
 		
-//		$crud->addRef('Sessie', ['label' => 'Sessies', 'grid_fields'=> ['datum', 'plaats', 'prijs', 'capaciteit']]);
 		$this->api->template->set('page_title', 'Workshops');
 	}
 	
@@ -37,19 +36,12 @@ class page_workshops extends Page {
 		$model->addExpression('cursisten')
 			->set($model->refSQL('Inschrijving')->count())
 			->caption('Cursisten');
-		$g = $this->add('View')->addStyle('#eee')->add('Grid');
-		$g->setModel($model, ['datum', 'plaats', 'cursisten']);
-		$g->addFormatter('cursisten', 'expander');
-		$g->addColumn('Button', 'sessie_aanpassen');
-		$g->addColumn('Button', 'wissen');
+		$crud = $this->add('CRUD');
+		$crud->setModel($model, ['datum', 'plaats', 'cursisten']);
 
-		if ($_GET['sessie_aanpassen']) {
-			
-		}
-
-		if ($_GET['wissen']) {
-			$this->add('Model_Sessie')->load($_GET['wissen'])->delete();
-			$this->js()->univ()->location($this->api->url('workshops'))->execute();
+		$g = $crud->grid;
+		if ($g) {
+			$g->addFormatter('cursisten', 'expander');
 		}
 	}
 	
@@ -57,26 +49,17 @@ class page_workshops extends Page {
 		$this->api->auth->check();
 		$model = $this->add('Model_Inschrijving');
 		$model->addCondition('ws_sessie_id', $_GET['ws_sessie_id']);
+		$model->addExpression('wissen')->set("'Inschrijving wissen'");
 		$this->api->stickyGET('ws_sessie_id');
-		$g = $this->add('View')->addStyle('#eee')->add('Grid');
-		$g->setModel($model, ['ws_cursist', 'betaald']);
-	}
-	
-	function page_nieuwsessie() {
-		$this->api->auth->check();
-		$model = $this->add('Model_Sessie');
-		$form = $this->add('Form')->addClass('stacked');
-		$form->setModel($model);
-		$form->set('ws_workshop_id', $_GET['id']);
-		$form->addSubmit();
-		if ($form->isSubmitted()) {
-// 			$cursist = $form->get('ws_cursist_id');
-// 			$sessie = $form->get('ws_sessie_id');
-// 			if ($this->add('Model_Inschrijving')->findInschrijving($cursist, $sessie)->loaded()) {
-// 				throw $form->exception('Deze cursist is reeds ingeschreven voor deze sessie')->setField('ws_sessie_id');
-// 			}
-			$form->update();
-			$form->js()->univ()->location($this->api->url('..'))->execute();
+		$g = $this->add('View')->addStyle('#eee')->add('Grid_Extended');
+		$g->setModel($model, ['ws_cursist', 'betaald', 'wissen']);
+		$g->setFormatter('betaald', 'toggle');
+		$g->addFormatter('wissen', 'confirm');
+		
+		if ($_GET['wissen']) {
+			$model->load($_GET['wissen'])->delete();
+			$this->js()->univ()->location($this->api->url('workshops'))->execute();
 		}
 	}
+	
 }
