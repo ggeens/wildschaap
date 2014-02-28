@@ -42,6 +42,31 @@ class page_workshops extends Page {
 		$g = $crud->grid;
 		if ($g) {
 			$g->addFormatter('cursisten', 'expander');
+			$g->addColumn('Button', 'cursist_toevoegen');
+		}
+		if ($_GET['cursist_toevoegen']) {
+			$name = $g->model->load($_GET['cursist_toevoegen'])->get('naam');
+ 			$this->js()->univ()->frameURL('Nieuwe cursist voor '.$name,
+ 				$this->api->url('./nieuwcursist', array('id'=>$_GET['cursist_toevoegen'])))
+ 					->execute();
+		}
+	}
+	
+	function page_sessies_nieuwcursist() {
+		$this->api->auth->check();
+		$model = $this->add('Model_Inschrijving');
+		$form = $this->add('Form')->addClass('stacked');
+		$form->setModel($model);
+		$form->set('ws_sessie_id', $_GET['id']);
+		$form->addSubmit();
+		if ($form->isSubmitted()) {
+			$cursist = $form->get('ws_cursist_id');
+			$sessie = $form->get('ws_sessie_id');
+			if ($this->add('Model_Inschrijving')->findInschrijving($cursist, $sessie)->loaded()) {
+				throw $form->exception('Deze cursist is reeds ingeschreven voor deze sessie')->setField('ws_cursist_id');
+			}
+			$form->update();
+			$form->js()->univ()->location($this->api->url('../..'))->execute();
 		}
 	}
 	
