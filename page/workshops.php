@@ -87,4 +87,16 @@ class page_workshops extends Page {
 		}
 	}
 	
+	function page_nieuwsessie() {
+		$this->api->auth->check();
+		$model = $this->add('Model_Sessie');
+		$form = $this->add('Form')->addClass('stacked');
+		$form->setModel($model);
+		$form->set('ws_workshop_id', $_GET['id']);
+		$form->addSubmit();
+		if ($form->isSubmitted()) {
+			$form->update();
+			$form->js()->univ()->location($this->api->url('..'))->execute();
+		}
+	}
 }

@@ -5,8 +5,8 @@ class Model_Sessie extends Model_Base {
 	function init() {
 		parent::init ();
 		
-		$this->addField ( 'datum' )->type ( 'date' )->required ( true )->sortable ( true )->caption ( 'Begindatum' );
 		$this->addField ( 'plaats' )->required ( true )->sortable ( true )->sortable ( true );
+		$this->addField ( 'datum' )->type ( 'date' )->required ( true )->sortable ( true )->caption ( 'Begindatum' );
 		$this->addField ( 'prijs' )->type ( 'money' );
 		$this->addField ( 'capaciteit' )->required ( true )->type ( 'int' )->caption ( 'Max. deelnemers' );
 		
