@@ -4,8 +4,9 @@ class Model_Inschrijving extends Model_Base {
 	function init() {
 		parent::init ();
 		
-		$this->hasOne ( 'Sessie' )->caption ( 'Sessie' )->required ( true );
+		$this->hasOne ( 'Voorstelling' )->caption ( 'Voorstelling' )->required ( true );
 		$this->hasOne ( 'Cursist' )->caption ( 'Cursist' )->required ( true );
+		$this->addField ( 'aantal' )->type ( 'int' );
 		
 		$this->addField ( 'betaald' )->type ( 'boolean' )->required ( true );
 	}

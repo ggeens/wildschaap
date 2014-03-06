@@ -1,5 +1,5 @@
 <?php
-class Model_Cursist extends SQL_Model {
+class Model_Cursist extends Model_Base {
 	public $table = 'ws_cursist';
 	public $title_field = 'naam';
 	function init() {
@@ -13,15 +13,6 @@ class Model_Cursist extends SQL_Model {
 		$this->addField ( 'telefoon' )->sortable ( true );
 		$this->addField ( 'is_mailings' )->type ( 'boolean' )->caption ( 'Stuur email' );
 		$this->addField ( 'opmerkingen' )->type ( 'text' );
-		$this->add ( 'Field_Deleted', 'deleted' );
 		$this->hasMany ( 'Inschrijving' );
-	}
-	function delete($id = null) {
-		if ($id)
-			$this->load ( $id );
-		if (! $this->loaded ())
-			throw $this->exception ( 'Unable to determine which record to delete' );
-		$this->set ( 'deleted', true );
-		$this->saveAndUnload ();
 	}
 }

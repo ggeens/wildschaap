@@ -1,6 +1,6 @@
 <?php
-class Model_Workshop extends Model_Base {
-	public $table = 'ws_workshop';
+class Model_Stuk extends Model_Base {
+	public $table = 'ws_stuk';
 	public $title_field = 'naam';
 	function init() {
 		parent::init ();
@@ -8,6 +8,6 @@ class Model_Workshop extends Model_Base {
 		$this->addField ( 'naam' )->required ( true )->sortable ( true );
 		$this->addField ( 'omschrijving' )->type ( 'text' )->allowHTML ( true );
 		
-		$this->hasMany ( 'Sessie' );
+		$this->hasMany ( 'Voorstelling' );
 	}
 }

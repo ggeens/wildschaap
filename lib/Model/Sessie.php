@@ -1,5 +1,5 @@
 <?php
-class Model_Sessie extends SQL_Model {
+class Model_Sessie extends Model_Base {
 	public $table = 'ws_sessie';
 	public $title_field = 'title';
 	function init() {
@@ -20,14 +20,5 @@ class Model_Sessie extends SQL_Model {
 			$d = $o->get ( 'datum' );
 			$o->set ( 'title', $n . ' (' . $d . ')' );
 		} );
-		$this->add ( 'Field_Deleted', 'deleted' );
-	}
-	function delete($id = null) {
-		if ($id)
-			$this->load ( $id );
-		if (! $this->loaded ())
-			throw $this->exception ( 'Unable to determine which record to delete' );
-		$this->set ( 'deleted', true );
-		$this->saveAndUnload ();
 	}
 }
