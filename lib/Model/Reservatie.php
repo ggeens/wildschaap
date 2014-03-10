@@ -1,6 +1,6 @@
 <?php
 class Model_Reservatie extends Model_Base {
-	public $table = 'ws_inschrijving';
+	public $table = 'ws_reservatie';
 	function init() {
 		parent::init ();
 		

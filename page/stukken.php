@@ -41,7 +41,7 @@ class page_stukken extends Page {
 
 		$g = $crud->grid;
 		if ($g) {
-			$g->addFormatter('reservatie', 'expander');
+			$g->addFormatter('reservaties', 'expander');
 			$g->addColumn('Button', 'reservatie_toevoegen');
 		}
 		if ($_GET['reservatie_toevoegen']) {
@@ -62,7 +62,7 @@ class page_stukken extends Page {
 		if ($form->isSubmitted()) {
 			$cursist = $form->get('ws_cursist_id');
 			$voorstelling = $form->get('ws_voorstelling_id');
-			if ($this->add('Model_Inschrijving')->findInschrijving($cursist, $voorstelling)->loaded()) {
+			if ($this->add('Model_Reservatie')->findReservatie($cursist, $voorstelling)->loaded()) {
 				throw $form->exception('Deze cursist heeft reeds gereserveerd voor deze voorstelling')->setField('ws_cursist_id');
 			}
 			$form->update();
@@ -80,6 +80,7 @@ class page_stukken extends Page {
 		$g->setModel($model, ['ws_cursist', 'betaald', 'aantal', 'wissen']);
 		$g->setFormatter('betaald', 'toggle');
 		$g->addFormatter('wissen', 'confirm');
+//		$g->addFormatter('aantal', 'prompt');
 		
 		if ($_GET['wissen']) {
 			$model->load($_GET['wissen'])->delete();
