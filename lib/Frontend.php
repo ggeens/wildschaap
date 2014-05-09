@@ -16,6 +16,7 @@ class Frontend extends ApiFrontend {
                         'mvc',
                         'misc/lib',
                     	'translation/lib',
+                    	'grid/lib'
                         )
                     ))
             ->setParent($this->pathfinder->base_location);

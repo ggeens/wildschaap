@@ -21,3 +21,5 @@ $config['auth']['key']='secret';
 #
 #  http://www.atk4.com/doc/config
 
+$config['locale']['time'] = 'H:i';
+

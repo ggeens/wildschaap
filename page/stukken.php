@@ -36,8 +36,8 @@ class page_stukken extends Page {
 		$model->addExpression('reservaties')
 			->set($model->refSQL('Reservatie')->sum('aantal'))
 			->caption('Reservaties');
-		$crud = $this->add('CRUD');
-		$crud->setModel($model, ['datum', 'uur', 'plaats', 'reservaties']);
+		$crud = $this->add('CRUD', array('grid_class'=>'Grid_Extended'));
+		$crud->setModel($model, ['plaats', 'datum', 'uur', 'reservaties']);
 
 		$g = $crud->grid;
 		if ($g) {
@@ -63,7 +63,7 @@ class page_stukken extends Page {
 			$cursist = $form->get('ws_cursist_id');
 			$voorstelling = $form->get('ws_voorstelling_id');
 			if ($this->add('Model_Reservatie')->findReservatie($cursist, $voorstelling)->loaded()) {
-				throw $form->exception('Deze cursist heeft reeds gereserveerd voor deze voorstelling')->setField('ws_cursist_id');
+				throw $form->exception('Deze persoon heeft reeds gereserveerd voor deze voorstelling')->setField('ws_cursist_id');
 			}
 			$form->update();
 			$form->js()->univ()->location($this->api->url('../..'))->execute();
@@ -80,7 +80,7 @@ class page_stukken extends Page {
 		$g->setModel($model, ['ws_cursist', 'betaald', 'aantal', 'wissen']);
 		$g->setFormatter('betaald', 'toggle');
 		$g->addFormatter('wissen', 'confirm');
-//		$g->addFormatter('aantal', 'prompt');
+		$g->addFormatter('aantal', 'grid/inline');
 		
 		if ($_GET['wissen']) {
 			$model->load($_GET['wissen'])->delete();
