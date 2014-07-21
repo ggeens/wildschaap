@@ -1,0 +1,17 @@
+insert into ws_translation (`key`, tr_nl) values ('File not found', 'Bestand niet gevonden');
+insert into ws_translation (`key`, tr_nl) values ('Password', 'Paswoord');
+insert into ws_translation (`key`, tr_nl) values ('%s is a mandatory field', '%s is verplicht');
+insert into ws_translation (`key`, tr_nl) values ('Save', 'Bewaar');
+insert into ws_translation (`key`, tr_nl) values ('Add', 'Toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Adding new Workshop', 'Workshop toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Add Workshop', 'Workshop toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Edit', 'Aanpassen');
+insert into ws_translation (`key`, tr_nl) values ('Delete', 'Wissen');
+insert into ws_translation (`key`, tr_nl) values ('Adding new Sessie', 'Sessie toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Add Sessie', 'Sessie toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Adding new Cursist', 'Cursist toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Add Cursist', 'Cursist toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Adding new Stuk', 'Stuk toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Add Stuk', 'Stuk toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Adding new Voorstelling', 'Voorstelling toevoegen');
+insert into ws_translation (`key`, tr_nl) values ('Add Voorstelling', 'Voorstelling toevoegen');
