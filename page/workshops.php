@@ -3,7 +3,7 @@ class page_workshops extends Page {
 	function page_index() {
 		$this->api->auth->check();
 		$crud = $this->add('CRUD');
-		$model = $this->add('Model_Workshop', null, ['naam', 'omschrijving', 'sessies']);
+		$model = $this->add('Model_Workshop', null, array('naam', 'omschrijving', 'sessies'));
 		$model->addExpression('sessies')
 			->set($model->refSQL('Sessie')->count())
 			->caption('Sessies');
@@ -13,7 +13,7 @@ class page_workshops extends Page {
 		if ($crud->grid) {
 			$grid = $crud->grid;
 			$grid->addPaginator(20);
-			$grid->addQuickSearch(['naam']);
+			$grid->addQuickSearch(array('naam'));
 			$grid->addFormatter('sessies', 'expander');
 			$grid->addColumn('Button', 'nieuwe_sessie');
 
@@ -37,7 +37,7 @@ class page_workshops extends Page {
 			->set($model->refSQL('Inschrijving')->count())
 			->caption('Cursisten');
 		$crud = $this->add('CRUD');
-		$crud->setModel($model, ['datum', 'plaats', 'cursisten']);
+		$crud->setModel($model, array('datum', 'plaats', 'cursisten'));
 
 		$g = $crud->grid;
 		if ($g) {
@@ -77,7 +77,7 @@ class page_workshops extends Page {
 		$model->addExpression('wissen')->set("'Inschrijving wissen'");
 		$this->api->stickyGET('ws_sessie_id');
 		$g = $this->add('View')->addStyle('#eee')->add('Grid_Extended');
-		$g->setModel($model, ['ws_cursist', 'betaald', 'wissen']);
+		$g->setModel($model, array('ws_cursist', 'betaald', 'wissen'));
 		$g->setFormatter('betaald', 'toggle');
 		$g->addFormatter('wissen', 'confirm');
 		

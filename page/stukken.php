@@ -3,7 +3,7 @@ class page_stukken extends Page {
 	function page_index() {
 		$this->api->auth->check();
 		$crud = $this->add('CRUD');
-		$model = $this->add('Model_Stuk', null, ['naam', 'omschrijving', 'voorstellingen']);
+		$model = $this->add('Model_Stuk', null, array('naam', 'omschrijving', 'voorstellingen'));
 		$model->addExpression('voorstellingen')
 			->set($model->refSQL('Voorstelling')->count())
 			->caption('Voorstellingen');
@@ -13,7 +13,7 @@ class page_stukken extends Page {
 		if ($crud->grid) {
 			$grid = $crud->grid;
 			$grid->addPaginator(20);
-			$grid->addQuickSearch(['naam']);
+			$grid->addQuickSearch(array('naam'));
 			$grid->addFormatter('voorstellingen', 'expander');
 			$grid->addColumn('Button', 'nieuwe_voorstelling');
 
@@ -37,7 +37,7 @@ class page_stukken extends Page {
 			->set($model->refSQL('Reservatie')->sum('aantal'))
 			->caption('Reservaties');
 		$crud = $this->add('CRUD', array('grid_class'=>'Grid_Extended'));
-		$crud->setModel($model, ['plaats', 'datum', 'uur', 'reservaties']);
+		$crud->setModel($model, array('plaats', 'datum', 'uur', 'reservaties'));
 
 		$g = $crud->grid;
 		if ($g) {
@@ -77,7 +77,7 @@ class page_stukken extends Page {
 		$model->addExpression('wissen')->set("'Reservatie wissen'");
 		$this->api->stickyGET('ws_voorstelling_id');
 		$g = $this->add('View')->addStyle('#eee')->add('Grid_Extended');
-		$g->setModel($model, ['ws_cursist', 'betaald', 'aantal', 'wissen']);
+		$g->setModel($model, array('ws_cursist', 'betaald', 'aantal', 'wissen'));
 		$g->setFormatter('betaald', 'toggle');
 		$g->addFormatter('wissen', 'confirm');
 		$g->addFormatter('aantal', 'grid/inline');

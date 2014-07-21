@@ -7,11 +7,11 @@ class page_cursisten extends Page {
 			->set($model->refSQL('Inschrijving')->count())
 			->caption('Sessies');
 		$crud = $this->add('CRUD');
-		$model = $crud->setModel($model, null, ['naam', 'email', 'inschrijvingen']);
+		$model = $crud->setModel($model, null, array('naam', 'email', 'inschrijvingen'));
 		if ($crud->grid) {
 			$grid = $crud->grid;
 			$grid->addPaginator(20);
-			$grid->addQuickSearch(['naam', 'email']);
+			$grid->addQuickSearch(array('naam', 'email'));
 			$grid->addFormatter('inschrijvingen', 'expander');
 			$grid->addColumn('Button', 'inschrijven');
 			
@@ -38,7 +38,7 @@ class page_cursisten extends Page {
 		$this->api->stickyGET('ws_cursist_id');
 		
 		$g = $this->add('View')->addStyle('background-color: #eee')->add('Grid_Extended');
-		$g->setModel($model, ['ws_workshop', 'datum', 'plaats', 'betaald']);
+		$g->setModel($model, array('ws_workshop', 'datum', 'plaats', 'betaald'));
 		$g->setFormatter('betaald', 'toggle');
 		$g->addColumn('Button', 'wissen');
 		$g->addFormatter('wissen', 'confirm');
